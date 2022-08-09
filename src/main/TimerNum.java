@@ -25,12 +25,13 @@ public class TimerNum extends JLabel implements Runnable{
 	@Override
 	public void run() {
 		while (true) {
+			
 			try {
 				Thread.sleep(1000);	// 1초
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
+			
 			if (second > 0) {
 				second -= 1;		// 1초씩 줄어듦
 				setText(second + "");

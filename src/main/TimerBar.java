@@ -22,12 +22,13 @@ public class TimerBar extends JLabel implements Runnable{
 	@Override
 	public void run() {
 		while (true) {
-			try {
-				Thread.sleep(1000 / (width / second));
+			
+			try { 
+				Thread.sleep(1000 / 30); 
 			} catch (Exception e) {
-				e.printStackTrace();
+				e.printStackTrace(); 
 			}
-
+			 
 			if (getWidth() > 0) {
 				width -= 1;	// 너비가 1씩 줄어듦
 				//System.out.println(width);
