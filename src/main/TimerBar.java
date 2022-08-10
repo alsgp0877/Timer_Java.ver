@@ -10,6 +10,8 @@ public class TimerBar extends JLabel implements Runnable{
 	Color color = new Color(255, 0, 0);
 	
 	int second;
+	
+	boolean stopT = true;//종료플래그
 
 	public TimerBar(int second) {
 		setBackground(color);
@@ -21,7 +23,7 @@ public class TimerBar extends JLabel implements Runnable{
 
 	@Override
 	public void run() {
-		while (true) {
+		while (stopT) {
 			
 			try { 
 				Thread.sleep(1000 / 30); 

@@ -10,6 +10,8 @@ public class TimerNum extends JLabel implements Runnable{
 	int x = 200, y = 150;
 	
 	int second;
+	
+	boolean stopT = true;//종료플래그
 
 	public TimerNum(int second) {
 		setOpaque(true);
@@ -24,7 +26,7 @@ public class TimerNum extends JLabel implements Runnable{
 
 	@Override
 	public void run() {
-		while (true) {
+		while (stopT) {
 			
 			try {
 				Thread.sleep(1000);	// 1초

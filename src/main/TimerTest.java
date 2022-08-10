@@ -33,14 +33,22 @@ public class TimerTest extends JFrame{
 			threadNum.start();//텍스트를 Thread에 넣고 시작
 		});
 		
-		JButton btn2 = new JButton("종료");
+		JButton btn2 = new JButton("종료1");
 		btn2.setBounds(30, 200, 122, 30);
 		btn2.addActionListener(event ->{
-			threadBar.interrupt();//그림Thread 종료
-			threadNum.interrupt();//텍스트 Thread에 종료
+			timerBar.stopT=false;//그림Thread 종료
+			timerNum.stopT=false;//텍스트 Thread에 종료
 		});
 		
+		//이렇게하면 true니까 다시 실행해야할것 같은데 왜 안하죠?
+		JButton btn3 = new JButton("종료2");
+		btn3.setBounds(30, 240, 122, 30);
+		btn3.addActionListener(event ->{
+			timerBar.stopT=true;//그림Thread 종료
+			timerNum.stopT=true;//텍스트 Thread에 종료
+		});
 		
+		panel.add(btn3);
 		panel.add(btn2);
 		panel.add(btn1);
 		panel.add(timerBar);
@@ -48,7 +56,7 @@ public class TimerTest extends JFrame{
 		add(panel);//최종적으로 그림과 텍스트를 그려넣기
 		
 		setTitle("타이머");
-		setSize(470, 300);
+		setSize(470, 600);
 		setVisible(true);
 		setResizable(false);
 		setLocationRelativeTo(null);
