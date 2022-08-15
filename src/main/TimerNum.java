@@ -2,6 +2,8 @@ package main;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.swing.JLabel;
 
@@ -11,7 +13,7 @@ public class TimerNum extends JLabel implements Runnable{
 	
 	int second;
 	
-	boolean stopT = true;//종료플래그
+	//boolean stopT = true;//종료플래그
 
 	public TimerNum(int second) {
 		setOpaque(true);
@@ -26,7 +28,7 @@ public class TimerNum extends JLabel implements Runnable{
 
 	@Override
 	public void run() {
-		while (stopT) {
+		while (!Thread.currentThread().isInterrupted()) {
 			
 			try {
 				Thread.sleep(1000);	// 1초
@@ -38,7 +40,9 @@ public class TimerNum extends JLabel implements Runnable{
 				second -= 1;		// 1초씩 줄어듦
 				setText(second + "");
 			} else {
-				//System.out.println("종료");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+				System.out.println("중지시간" + sdf.format(cal.getTime()));  
 				break;
 			}
 		}
