@@ -21,6 +21,9 @@ public class TimerTest extends JFrame{
 	private TimerNum timerNum;
 	private Thread threadNum;
 	
+	private TimerRound timerRound;
+	private Thread threadRound;
+
 	
 	public TimerTest() {
 		int second = 15;		// 초
@@ -30,16 +33,18 @@ public class TimerTest extends JFrame{
 		
 		timerBar = new TimerBar(second);
 		timerNum = new TimerNum(second);
-		
+		timerRound = new TimerRound();
 		
 		threadBar = new Thread(timerBar);
 		threadNum = new Thread(timerNum);
+		threadRound = new Thread(timerRound);
 		
 		JButton btn1 = new JButton("시작");
 		btn1.setBounds(30, 170, 122, 30);
 		btn1.addActionListener(event ->{
 			threadBar.start();//그림을 Thread에 넣고 시작
 			threadNum.start();//텍스트를 Thread에 넣고 시작
+			threadRound.start();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
 			Calendar cal = Calendar.getInstance();
 			System.out.println("시작시간" + sdf.format(cal.getTime())); 
@@ -62,7 +67,7 @@ public class TimerTest extends JFrame{
 			
 			threadBar.interrupt();
 			threadNum.interrupt();
-			
+			threadRound.interrupt();
 			
 			
 		});
@@ -71,10 +76,9 @@ public class TimerTest extends JFrame{
 		panel.add(btn1);
 		panel.add(timerBar);
 		panel.add(timerNum);
-		
-		TimerRound timerRound = new TimerRound();
 		panel.add(timerRound);
 		
+		add(new TimerRound());	
 		
 		setTitle("타이머");
 		setSize(470, 600);
