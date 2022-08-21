@@ -9,11 +9,9 @@ import javax.swing.JLabel;
 
 public class TimerNum extends JLabel implements Runnable{
 	int width = 75, height = 75;
-	int x = 200, y = 150;
+	int x = 160, y = 300;
 	
 	int second;
-	
-	//boolean stopT = true;//종료플래그
 
 	public TimerNum(int second) {
 		setOpaque(true);
@@ -40,9 +38,6 @@ public class TimerNum extends JLabel implements Runnable{
 				second -= 1;		// 1초씩 줄어듦
 				setText(second + "");
 			} else {
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-				Calendar cal = Calendar.getInstance();
-				System.out.println("중지시간" + sdf.format(cal.getTime()));  
 				break;
 			}
 		}

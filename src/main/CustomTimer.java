@@ -11,12 +11,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class TimerTest extends JFrame{
+public class CustomTimer extends JFrame{
 	
 	private JPanel panel;
-	
-	private TimerBar timerBar;
-	private Thread threadBar;
 
 	private TimerNum timerNum;
 	private Thread threadNum;
@@ -25,26 +22,25 @@ public class TimerTest extends JFrame{
 	private Thread threadRound;
 
 	
-	public TimerTest() {
-		int second = 15;		// 초
+	public CustomTimer() {
+		int second = 15;//시간은 원하는 방향으로 설정하면 될듯하다. 버튼으로 설정해도되고 등..
 		
 		panel = new JPanel();
 		panel.setLayout(null);
 		
-		timerBar = new TimerBar(second);
 		timerNum = new TimerNum(second);
 		timerRound = new TimerRound();
+		add(timerRound);//패널에 원 추가하기
 		
-		threadBar = new Thread(timerBar);
 		threadNum = new Thread(timerNum);
 		threadRound = new Thread(timerRound);
 		
+		
 		JButton btn1 = new JButton("시작");
-		btn1.setBounds(30, 170, 122, 30);
+		btn1.setBounds(30, 20, 122, 30);
 		btn1.addActionListener(event ->{
-			threadBar.start();//그림을 Thread에 넣고 시작
 			threadNum.start();//텍스트를 Thread에 넣고 시작
-			threadRound.start();
+			threadRound.start();//원을 Thread에 넣고 시작
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
 			Calendar cal = Calendar.getInstance();
 			System.out.println("시작시간" + sdf.format(cal.getTime())); 
@@ -52,36 +48,26 @@ public class TimerTest extends JFrame{
 		});
 		
 		JButton btn2 = new JButton("중지");
-		btn2.setBounds(30, 200, 122, 30);
+		btn2.setBounds(240, 20, 122, 30);
 		btn2.addActionListener(event ->{
 	
-			
 			timerNum.second=0;
 			timerNum.setText(0 + "");
 			
-			timerBar.width=0;
-
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-			Calendar cal = Calendar.getInstance();
-			System.out.println("중지시간" + sdf.format(cal.getTime()));  
+			timerRound.startAngle = -1;
 			
-			threadBar.interrupt();
-			threadNum.interrupt();
-			threadRound.interrupt();
+			threadNum.interrupt();//텍스트 Thread 중지
+			threadRound.interrupt();//원 Thread 중지
 			
 			
 		});
 		
 		panel.add(btn2);
 		panel.add(btn1);
-		panel.add(timerBar);
-		panel.add(timerNum);
-		panel.add(timerRound);
-		
-		add(new TimerRound());	
+		panel.add(timerNum);//패널에 텍스트 추가하기
 		
 		setTitle("타이머");
-		setSize(470, 600);
+		setSize(400, 450);
 		setVisible(true);
 		setResizable(false);
 		setLocationRelativeTo(null);
