@@ -54,7 +54,8 @@ public class CustomTimer extends JFrame{
 			timerNum.second=0;
 			timerNum.setText(0 + "");
 			
-			timerRound.startAngle = -1;
+			timerRound.stop = -1;
+			timerRound.startAngle = 0;
 			
 			threadNum.interrupt();//텍스트 Thread 중지
 			threadRound.interrupt();//원 Thread 중지

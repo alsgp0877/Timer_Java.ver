@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 
 public class TimerRound extends JLabel implements Runnable{
 	int startAngle = 0;
+	int stop = 0;
 	
 	
 	@Override
@@ -27,10 +28,13 @@ public class TimerRound extends JLabel implements Runnable{
     			Calendar cal = Calendar.getInstance();
     			System.out.println("중지시간" + sdf.format(cal.getTime())); 
     			break;
-            }else if(startAngle == -1){//쓰레드를 중지시켰을때 종료
+            }else if(stop == -1){//쓰레드를 중지시켰을때 종료
+            	startAngle = 0;
+            	repaint();
     			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
     			Calendar cal = Calendar.getInstance();
     			System.out.println("중지시간" + sdf.format(cal.getTime()));  
+    			
             	break;
             }else {
             	startAngle += 24;//360/15 이건 커스텀하기 나름!

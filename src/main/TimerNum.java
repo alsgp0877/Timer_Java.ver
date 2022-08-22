@@ -38,6 +38,7 @@ public class TimerNum extends JLabel implements Runnable{
 				second -= 1;		// 1초씩 줄어듦
 				setText(second + "");
 			} else {
+				
 				break;
 			}
 		}
